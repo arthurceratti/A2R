@@ -38,8 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # < here
+    'allauth', # < here
+    'allauth.account', # < here
+    'allauth.socialaccount', # < here
     'myapp'
 ]
+
+SITE_ID = 1 # < here
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # < here
+LOGIN_REDIRECT_URL = '/' # < here
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,4 +132,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT= os.path.join(BASE_DIR,'myapp\static') #procura por static dentro do diretorio "BASE"
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #com este comando whitenoise 
+# se encarrega de comprimir os arquivos do diretório "static" e de inserir os mesmos em cachê
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage' # Neste outro comando os arquivos são apenas comprimidos sem serem adicionados ao cachê

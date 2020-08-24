@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+#import django_heroku
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,7 +33,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    #'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,15 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites', # < here
+    'myapp',
+    'base',
     'allauth', # < here
     'allauth.account', # < here
     'allauth.socialaccount', # < here
-    'myapp'
 ]
 
-SITE_ID = 1 # < here
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # < here
-LOGIN_REDIRECT_URL = '/' # < here
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,7 +65,8 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'myapp/templates')],
+       # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media', #adicionado para trabalhar com o recebimento de arquivos
             ],
         },
     },
@@ -130,10 +132,27 @@ USE_TZ = True
 
 #PROJECT_DIR=os.path.dirname(__file__)
 
+
+STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles') #procura por static dentro do diretorio "BASE" - arquivos referentes à admin
+MEDIA_ROOT= os.path.join(BASE_DIR,'MEDIA')
 STATIC_URL = '/static/'
-STATIC_ROOT= os.path.join(BASE_DIR,'myapp\static') #procura por static dentro do diretorio "BASE"
+MEDIA_URL = '/media/'
+
 
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #com este comando whitenoise 
 # se encarrega de comprimir os arquivos do diretório "static" e de inserir os mesmos em cachê
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage' # Neste outro comando os arquivos são apenas comprimidos sem serem adicionados ao cachê
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1 # < here
+EMAIL_BACKEND = 'none' # < here
+LOGIN_REDIRECT_URL = 'empresa/create/' # < determina para onde o usuário será redirecionado no momento que efetuar login
+
+
+
+#django_heroku.settings(locals())

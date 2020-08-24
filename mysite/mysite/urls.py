@@ -15,11 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+
 from myapp import views as myapp_views
+from django.views.generic import TemplateView
+
+from django.conf import settings # < here
+from django.conf.urls.static import static
 
 urlpatterns = [
-    #path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
+    path('detail/', myapp_views.detail, name='detail'),
     path('', myapp_views.index, name='index'),
-    path('accounts/', include('allauth.urls'))
-]
+    #path('accounts/', include('allauth.urls')),
+    path('login/empresa/create/', myapp_views.create, name='create'),
+    path('',include("django.contrib.auth.urls")),
+    ] 
+

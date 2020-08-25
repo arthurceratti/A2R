@@ -1,37 +1,42 @@
 {% extends 'base/base.html' %}
 
-{% block content %}
-<header id="header">
-    <div class="inner">
-        <a href="index.html" class="logo"><strong>A²R</strong> Consultoria em Gestão de Energia</a>
-        <nav id="nav">
-            <a href="\">Home</a>
-            <a href="generic.html">Faça login</a>
-            <a href="elements.html">Cadastre-se</a>
-        </nav>
-        <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-    </div>
-</header>
+
+
+    
+    {% block content %}
+    <header id="header">
+        <div class="inner">
+            <a href="index.html" class="logo"><strong>A²R</strong> Consultoria em Gestão de Energia</a>
+            <nav id="nav">
+                <a href="\">Home</a>
+                <a href="generic.html">Faça login</a>
+                <a href="elements.html">Cadastre-se</a>
+            </nav>
+            <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+        </div>
+    </header>
+            
+    <section id="banner">
+
+        <h2>teste2</h2>
+
         
-<section id="banner">
 
-    <h2>teste2</h2>
+    </section>
+    <ul>
+        {% for empresa in empresas %}
+        <li> {{ empresa.nome_da_empresa }} </li>
+        <img  src="{{ empresa.image.url }}">  
+        {% endfor %}
 
-      
+    </ul>
+    <ul>
+    <li><a>Home</a></li>
+    <li class="nav-item"> <!-- here -->
+    <a class="nav-link" href="/empresa/create/"> Cadastrar Empresa </a>
+    </li>
+    </ul>
+    <h2>teste3</h2>
+    {% endblock %}
 
-</section>
-<ul>
-    {% for empresa in empresas %}
-      <li> {{ empresa.nome_da_empresa }} </li>
-     <img  src="{{ empresa.image.url }}">  
-    {% endfor %}
 
-</ul>
-<ul>
-  <li><a>Home</a></li>
-  <li class="nav-item"> <!-- here -->
-  <a class="nav-link" href="/empresa/create/"> Cadastrar Empresa </a>
-  </li>
-</ul>
-<h2>teste3</h2>
-{% endblock %}

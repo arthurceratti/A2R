@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites', # < here
+    'crispy_forms',
     'myapp',
     'base',
+    'register',
     'allauth', # < here
     'allauth.account', # < here
     'allauth.socialaccount', # < here
@@ -152,7 +154,8 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1 # < here
 EMAIL_BACKEND = 'none' # < here
 LOGIN_REDIRECT_URL = 'empresa/create/' # < determina para onde o usuário será redirecionado no momento que efetuar login
+LOGOUT_REDIRECT_URL = '/' # < determina para onde o usuário será redirecionado no momento que efetuar LOGOUT
 
-
+CRISPY_TEMPLATE_PACK="bootstrap4"
 
 #django_heroku.settings(locals())

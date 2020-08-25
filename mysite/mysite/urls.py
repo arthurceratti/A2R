@@ -15,19 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
 from myapp import views as myapp_views
-from django.views.generic import TemplateView
+from register import views as register_views
 
-from django.conf import settings # < here
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('detail/', myapp_views.detail, name='detail'),
-    path('', myapp_views.index, name='index'),
+    path('detail/', myapp_views.detail, name='detail'), #observar que detail é importado de myapp/views.py "as" myapp_views.detail (_____."função dentro de views")
+    path('', myapp_views.index, name='index'),#observar que detail é importado de myapp/views.py "as" myapp_views.detail (_____."função dentro de views")
     #path('accounts/', include('allauth.urls')),
-    path('login/empresa/create/', myapp_views.create, name='create'),
+    path('login/empresa/create/', myapp_views.create, name='create'),#observar que detail é importado de myapp/views.py "as" myapp_views.detail (_____."função dentro de views")
     path('',include("django.contrib.auth.urls")),
+    path('register/', register_views.register, name="register" ),
     ] 
 
